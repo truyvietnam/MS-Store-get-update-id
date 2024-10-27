@@ -326,7 +326,7 @@ func main() {
 	xmlContent := string(xmlTemplate)
 	xmlContent = strings.Replace(xmlContent, "{0}", cookie, 1)
 	xmlContent = strings.Replace(xmlContent, "{1}", catId, 1)
-	xmlContent = strings.Replace(xmlContent, "{2}", Retail, 1)
+	xmlContent = strings.Replace(xmlContent, "{2}", InsiderSlow, 1)
 
 	req, err := http.Post("https://fe3.delivery.mp.microsoft.com/ClientWebService/client.asmx", "application/soap+xml", strings.NewReader(xmlContent))
 	if err != nil {
@@ -348,7 +348,7 @@ func main() {
 	}
 
 	for _, a := range data.Body.SyncUpdatesResponse.SyncUpdatesResult.NewUpdates.UpdateInfo {
-		if strings.Contains(a.XML.ApplicabilityRules.Metadata.AppxPackageMetadata.AppxMetadata.PackageMoniker, "Microsoft.Services.Store.Engagement_") && strings.Contains(a.XML.ApplicabilityRules.Metadata.AppxPackageMetadata.AppxMetadata.PackageMoniker, "x64") {
+		if strings.Contains(a.XML.ApplicabilityRules.Metadata.AppxPackageMetadata.AppxMetadata.PackageMoniker, "Microsoft.MinecraftUWP_") && strings.Contains(a.XML.ApplicabilityRules.Metadata.AppxPackageMetadata.AppxMetadata.PackageMoniker, "x64") {
 			fmt.Println("Update id for latest x64 MC bedrock: " + a.XML.UpdateIdentity.UpdateID)
 		}
 	}
